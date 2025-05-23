@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: mon-app-rails
+    env: ruby
+    plan: free
+    buildCommand: "bundle install && bundle exec rake assets:precompile && bundle exec rake db:migrate"
+    startCommand: "bundle exec rails server -b 0.0.0.0"
+    autoDeploy: true
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false

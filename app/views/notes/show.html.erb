@@ -1,0 +1,6 @@
+<h1> Note </h1>
+<%= @note.title %>
+<%= @note.content %>
+<%= button_to "Destroy this note", note_path(@note), method: :delete %>
+<%= link_to "New note", new_note_path %>
+<%= link_to "Show all notes", note_path %>
