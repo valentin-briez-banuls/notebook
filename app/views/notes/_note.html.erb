@@ -1,4 +1,6 @@
-<div id="<% dom_id note %>">
-<%= note.title %>
-<%= note.content %>
+<div id="<%= dom_id(note) %>">
+  <h3><%= note.title %></h3>
+  <p><%= note.content.to_plain_text.truncate(100) %></p>
+
+  <button class="edit-note-button" data-note-id="<%= note.id %>">✏️ Modifier</button>
 </div>

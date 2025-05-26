@@ -1,6 +1,53 @@
-<h1> Notes </h1>
+<h1>Mes notes</h1>
 
+<!-- Bouton de création -->
+<%= link_to "➕ Créer une note", new_note_path(format: :js), id: "open-create-modal" %>
 
-<%= render @notes %>
+<!-- Liste des notes -->
+<div id="notes-list">
+  <%= render @notes %>
+</div>
 
-<%= link_to "Create note", new_note_path %>
+<!-- Modale -->
+<div id="modal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:white; padding:2rem; border:1px solid #ccc; z-index:1000;">
+  <button id="close-modal" style="float:right;">❌</button>
+  <div id="modal-content"></div>
+</div>
+
+<!-- Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("modal");
+        const modalContent = document.getElementById("modal-content");
+
+        function openModalWithURL(url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    modalContent.innerHTML = html;
+                    modal.style.display = "block";
+                });
+        }
+
+        const createBtn = document.getElementById("open-create-modal");
+        if (createBtn) {
+            createBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                openModalWithURL(createBtn.href);
+            });
+        }
+
+        document.querySelectorAll(".edit-note-button").forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                const noteId = button.dataset.noteId;
+                openModalWithURL(`/notes/${noteId}/edit.js`);
+            });
+        });
+
+        document.getElementById("close-modal").addEventListener("click", () => {
+            modal.style.display = "none";
+            modalContent.innerHTML = "";
+        });
+    });
+</script>

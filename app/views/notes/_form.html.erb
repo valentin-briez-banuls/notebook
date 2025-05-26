@@ -1,21 +1,17 @@
-<%= form_with(model: note) do |form| %>
-
+<%= form_with(model: note, local: false) do |form| %>
   <div>
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
 
-  <div class="field">
+  <div>
     <%= form.label :content %>
     <%= form.rich_text_area :content %>
   </div>
 
-  <div>
-    <%= form.hidden_field :user_id, value: current_user.id %>
-  </div>
+  <%= form.hidden_field :user_id, value: current_user.id %>
 
   <div>
     <%= form.submit %>
   </div>
-
 <% end %>

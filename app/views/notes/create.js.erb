@@ -1,0 +1,3 @@
+document.getElementById("modal").style.display = "none";
+document.getElementById("modal-content").innerHTML = "";
+document.getElementById("notes-list").insertAdjacentHTML("afterbegin", "<%= j render(@note) %>");
