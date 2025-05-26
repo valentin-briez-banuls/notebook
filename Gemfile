@@ -17,6 +17,7 @@ gem "sprockets-rails"
 gem "puma", "~> 5.0"
 
 group :development, :test do
+  gem 'rubocop', require: false
   gem "sqlite3", "~> 1.4"
 end
 
